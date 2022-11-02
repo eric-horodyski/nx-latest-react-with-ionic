@@ -1,0 +1,86 @@
+{
+  "name": "nx-latest-react-with-ionic",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/nx-latest-react-with-ionic/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/nx-latest-react-with-ionic",
+        "index": "apps/nx-latest-react-with-ionic/src/index.html",
+        "baseHref": "/",
+        "main": "apps/nx-latest-react-with-ionic/src/main.tsx",
+        "polyfills": "apps/nx-latest-react-with-ionic/src/polyfills.ts",
+        "tsConfig": "apps/nx-latest-react-with-ionic/tsconfig.app.json",
+        "assets": [
+          "apps/nx-latest-react-with-ionic/src/favicon.ico",
+          "apps/nx-latest-react-with-ionic/src/assets"
+        ],
+        "styles": ["apps/nx-latest-react-with-ionic/src/styles.css"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/nx-latest-react-with-ionic/src/environments/environment.ts",
+              "with": "apps/nx-latest-react-with-ionic/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/webpack:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "nx-latest-react-with-ionic:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "nx-latest-react-with-ionic:build:development"
+        },
+        "production": {
+          "buildTarget": "nx-latest-react-with-ionic:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/nx-latest-react-with-ionic/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/nx-latest-react-with-ionic/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
